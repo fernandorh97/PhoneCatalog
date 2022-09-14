@@ -1,0 +1,9 @@
+{
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "javascript.validate.enable": false,
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single",
+    "editor.formatOnSave": true
+}
