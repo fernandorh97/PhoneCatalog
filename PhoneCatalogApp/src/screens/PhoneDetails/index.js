@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useTheme} from '@react-navigation/native';
-import {Image, ScrollView, Text, View} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 
 import {styles} from './styles';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {InputView, Editable, SpecItem} from '@/components';
+import {InputView, Editable, SpecItem, Button} from '@/components';
 import {PHONE_IMAGES, PHONE_NAMES} from '@/constants';
 import {notfound} from '@/assets';
 import {useTranslation} from 'react-i18next';
@@ -15,20 +15,37 @@ import ProcessorIcon from '@/assets/icons/processor.svg';
 import ScreenIcon from '@/assets/icons/screen.svg';
 import RamIcon from '@/assets/icons/ram.svg';
 import {typography} from '@/theme';
+import {AddPhone, DeletePhone, UpdatePhone} from '@/api/PhoneCatalogApi';
+import {addPhone, deletePhone, updatePhone} from '@/actions/PhonesActions';
 
 export function PhoneDetails({route, navigation}) {
   const theme = useTheme();
   const phoneId = route?.params?.phoneId;
   const phoneList = useSelector(state => state.phones?.list);
-  const defaultPhone =
-    phoneId === undefined
-      ? {price: 0, ram: 0}
-      : phoneList?.find(x => x.id === phoneId);
-  const [phone, setPhone] = useState(defaultPhone);
+  const isNew = phoneId === undefined;
+  const [phone, setPhone] = useState(
+    isNew ? {price: 0, ram: 0} : phoneList?.find(x => x.id === phoneId),
+  );
   const {t} = useTranslation('common');
+  const dispatch = useDispatch();
 
-  const [editable, setEditable] = useState(false);
+  const scrollRef = useRef();
+
+  const [status, setStatus] = useState('');
+
+  const [editable, setEditable] = useState(phoneId === undefined);
   const [editing, setEditing] = useState(null);
+
+  const enableConfirm =
+    phone.name &&
+    phone.manufacturer &&
+    phone.imageFileName &&
+    phone.price &&
+    phone.description &&
+    phone.color &&
+    phone.processor &&
+    phone.screen &&
+    phone.ram;
 
   const imageSource = PHONE_IMAGES[phone?.imageFileName] || notfound;
   const imageIndex = Object.keys(PHONE_NAMES).findIndex(
@@ -81,7 +98,7 @@ export function PhoneDetails({route, navigation}) {
 
   return (
     <View testID="phone-details-screen">
-      <ScrollView>
+      <ScrollView ref={scrollRef}>
         <View
           style={[
             styles.container,
@@ -151,6 +168,78 @@ export function PhoneDetails({route, navigation}) {
             />
           </View>
         </View>
+        {status && (
+          <Text style={[styles.status, {color: theme.colors.placeholderText}]}>
+            {status}
+          </Text>
+        )}
+        {editable && isNew && (
+          <Button
+            disabled={!enableConfirm}
+            onPress={() => {
+              setEditable(false);
+              AddPhone(phone)
+                .then(x => {
+                  phone.id = x;
+                  dispatch(addPhone(phone));
+                  setStatus(t('phoneAdded'));
+                  scrollRef.current?.scrollToEnd();
+                })
+                .catch(x => {
+                  console.log('AddPhone error', x);
+                  setEditable(true);
+                });
+            }}
+            testID={'add-button'}
+            style={styles.button}
+            text={t('addPhone')}
+          />
+        )}
+        {editable && !isNew && (
+          <Button
+            disabled={!enableConfirm}
+            onPress={() => {
+              setEditable(false);
+              UpdatePhone(phone.id, phone)
+                .then(x => {
+                  dispatch(updatePhone(phone));
+                  setStatus(t('phoneUpdated'));
+                })
+                .catch(x => {
+                  console.log('UpdatePhone error', x);
+                  setEditable(true);
+                });
+            }}
+            testID={'update-button'}
+            style={styles.button}
+            text={t('confirmChanges')}
+          />
+        )}
+        {!editable && !isNew && (
+          <>
+            <Button
+              onPress={() => {
+                setEditable(true);
+              }}
+              testID={'edit-button'}
+              style={styles.editButton}
+              text={t('editPhone')}
+            />
+            <Button
+              onPress={() => {
+                DeletePhone(phone.id)
+                  .then(x => {
+                    dispatch(deletePhone(phone.id));
+                    navigation.goBack();
+                  })
+                  .catch(x => console.log('DeletePhone error', x));
+              }}
+              testID={'delete-button'}
+              style={[styles.button, {backgroundColor: theme.colors.red}]}
+              text={t('deletePhone')}
+            />
+          </>
+        )}
       </ScrollView>
       {editing && (
         <InputView
@@ -162,7 +251,7 @@ export function PhoneDetails({route, navigation}) {
             newPhone[editing] = result;
             setPhone(newPhone);
           }}
-          defaultValue={phone[editing]?.toString()}
+          defaultValue={phone[editing] ? phone[editing]?.toString() : ''}
         />
       )}
     </View>

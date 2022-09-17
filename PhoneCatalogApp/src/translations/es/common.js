@@ -4,6 +4,14 @@ export default {
   back: 'Atrás',
   loading: 'Cargando',
 
+  addPhone: 'Añadir nuevo móvil',
+  editPhone: 'Editar móvil',
+  deletePhone: 'Borrar móvil',
+  confirmChanges: 'Confirmar cambios',
+
+  phoneAdded: 'Móvil añadido',
+  phoneUpdated: 'Móvil actualizado',
+
   phoneCatalog: 'Catálogo',
   phoneDetails: 'Detalles',
 

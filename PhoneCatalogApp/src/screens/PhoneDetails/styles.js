@@ -39,4 +39,16 @@ export const styles = StyleSheet.create({
     paddingTop: 0,
     paddingHorizontal: spacing.l,
   },
+  editButton: {
+    margin: spacing.l,
+    marginBottom: 0,
+  },
+  button: {
+    margin: spacing.l,
+  },
+  status: {
+    ...typography.h3,
+    alignSelf: 'center',
+    marginVertical: spacing.l,
+  },
 });

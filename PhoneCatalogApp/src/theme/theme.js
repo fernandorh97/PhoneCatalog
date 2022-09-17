@@ -10,6 +10,7 @@ export const theme = {
       phone: '#ffffff',
 
       white: '#FFFFFF',
+      red: '#A00000',
       transparent: 'transparent',
 
       disabledButton: '#525666',
@@ -31,6 +32,7 @@ export const theme = {
       phone: '#202030',
 
       white: '#FFFFFF',
+      red: '#A00000',
       transparent: 'transparent',
 
       disabledButton: '#525666',
