@@ -2,7 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Home, PhoneDetails} from '@/screens';
-import {typography} from '@/theme';
+import {theme, typography} from '@/theme';
 import {useTranslation} from 'react-i18next';
 
 const Stack = createNativeStackNavigator();
@@ -15,6 +15,8 @@ export function AppNavigator() {
       screenOptions={{
         headerShown: true,
         headerTitleStyle: {...typography.h4},
+        headerTitleAlign: 'center',
+        headerTintColor: 'white',
       }}
       initialRouteName="Home">
       <Stack.Screen

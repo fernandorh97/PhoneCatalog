@@ -6,4 +6,13 @@ export default {
 
   phoneCatalog: 'Catálogo',
   phoneDetails: 'Detalles',
+
+  name: 'Nombre',
+  manufacturer: 'Fabricante',
+  price: 'Precio',
+  description: 'Descripción',
+  color: 'Color',
+  processor: 'Procesador',
+  screen: 'Pantalla',
+  ram: 'RAM',
 };

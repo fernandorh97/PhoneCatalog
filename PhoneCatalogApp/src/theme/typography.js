@@ -39,6 +39,11 @@ export const typography = StyleSheet.create({
     fontSize: window.width * ratio * 16,
     letterSpacing: -0.2,
   },
+  noteMedium: {
+    fontFamily: 'Roboto-Medium',
+    fontSize: window.width * ratio * 14,
+    letterSpacing: -0.2,
+  },
   note: {
     fontFamily: 'Roboto-Regular',
     fontSize: window.width * ratio * 14,

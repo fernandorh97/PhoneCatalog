@@ -1,11 +1,14 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useTheme} from '@react-navigation/native';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity} from 'react-native';
 
 import {styles} from './styles';
+import {PHONE_IMAGES} from '@/constants';
+import {notfound} from '@/assets';
 
-export function PhoneItem({name, onPress, testID}) {
+export function PhoneItem({name, imageFileName, onPress, testID}) {
   const theme = useTheme();
+  const imageSource = PHONE_IMAGES[imageFileName] || notfound;
 
   return (
     <TouchableOpacity
@@ -18,7 +21,12 @@ export function PhoneItem({name, onPress, testID}) {
         style={[styles.name, {color: theme.colors.text}]}>
         {name}
       </Text>
-      <View style={[styles.image, {backgroundColor: theme.colors.text}]} />
+      <Image
+        accessibilityIgnoresInvertColors
+        fadeDuration={0}
+        source={imageSource}
+        style={styles.image}
+      />
     </TouchableOpacity>
   );
 }

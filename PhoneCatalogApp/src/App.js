@@ -17,7 +17,7 @@ export default function App() {
       <NavigationContainer theme={appTheme}>
         <StatusBar
           backgroundColor={appTheme.colors.card}
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          barStyle={'light-content'}
         />
         <AppNavigator />
       </NavigationContainer>

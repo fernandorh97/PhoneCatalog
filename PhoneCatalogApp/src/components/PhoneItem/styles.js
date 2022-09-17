@@ -8,7 +8,7 @@ const window = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     margin: spacing.xs,
-    width: window.width * 0.5 - spacing.xs * 2,
+    width: window.width * 0.5 - spacing.xs * 3,
     height: window.width * 0.65,
     padding: spacing.xs,
     justifyContent: 'space-around',
