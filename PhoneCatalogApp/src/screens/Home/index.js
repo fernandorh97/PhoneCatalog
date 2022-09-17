@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {useTheme} from '@react-navigation/native';
 import {FlatList, ScrollView, Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
+import LottieView from 'lottie-react-native';
 
 import {styles} from './styles';
-import {PhoneItem} from '@/components';
+import {AddButton, PhoneItem} from '@/components';
 import {GetPhones} from '@/api/PhoneCatalogApi';
 import {typography} from '@/theme';
 import {useDispatch, useSelector} from 'react-redux';
 import {setPhoneList} from '@/actions/PhonesActions';
+import {spinnerAnim} from '@/assets';
 
 export function Home({navigation}) {
   const {t} = useTranslation('common');
@@ -29,19 +31,16 @@ export function Home({navigation}) {
   }, []);
 
   return (
-    <View
-      testID="home-screen"
-      style={{backgroundColor: theme.colors.background}}>
+    <View testID="home-screen" style={styles.screen}>
       {!phoneList ? (
-        <Text style={[typography.h2, {color: theme.colors.text}]}>
-          {t('loading')}...
-        </Text>
+        <LottieView style={styles.spinner} source={spinnerAnim} autoPlay loop />
       ) : (
         <FlatList
           data={phoneList}
           renderItem={({item}) => (
             <PhoneItem
               name={item.name}
+              imageFileName={item.imageFileName}
               onPress={() =>
                 navigation.navigate('PhoneDetails', {phoneId: item.id})
               }
@@ -52,6 +51,10 @@ export function Home({navigation}) {
           columnWrapperStyle={styles.row}
         />
       )}
+      <AddButton
+        style={styles.addButton}
+        onPress={() => navigation.navigate('PhoneDetails')}
+      />
     </View>
   );
 }
