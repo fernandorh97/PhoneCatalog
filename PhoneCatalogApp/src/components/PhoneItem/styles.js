@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
     width: window.width * 0.35,
     height: undefined,
     aspectRatio: 0.77,
+    resizeMode: 'contain',
   },
   name: {
     ...typography.bodyLargeMedium,
