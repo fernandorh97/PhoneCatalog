@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using PhoneCatalogAPI.Interfaces;
+using PhoneCatalogAPI.Models;
 
 namespace PhoneCatalogAPI.Controllers
 {
@@ -7,29 +9,57 @@ namespace PhoneCatalogAPI.Controllers
     public class PhonesController : ControllerBase
     {
         private readonly ILogger<PhonesController> _logger;
+        private readonly IPhoneService _phoneService;
 
-        public PhonesController(ILogger<PhonesController> logger)
+        public PhonesController(ILogger<PhonesController> logger, IPhoneService phoneService)
         {
             _logger = logger;
+            _phoneService = phoneService;
         }
 
+        /// <summary>
+        /// Get all phones
+        /// </summary>
         [HttpGet]
         public IEnumerable<Phone> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new Phone
-            {
-                Id = index,
-                Name = $"iPhone { 6 + index}",
-                Manufacturer = "Apple",
-                Description = "Lorem ipsum dolor sit amet consectetur.",
-                Color = "Black",
-                Price = 769 + index * 92,
-                ImageFileName = $"IPhone_{6 + index}.png",
-                Screen = "4,7 inch IPS",
-                Processor = "A10 Fusion",
-                Ram = index * 2,
-            })
-            .ToArray();
+            return _phoneService.GetAllPhones();
+        }
+
+        /// <summary>
+        /// Get phone by id
+        /// </summary>
+        [HttpGet("{id}")]
+        public Phone? GetPhone(int id)
+        {
+            return _phoneService.GetPhone(id);
+        }
+
+        /// <summary>
+        /// Add new phone
+        /// </summary>
+        [HttpPost]
+        public int Add([FromBody] PhoneData model)
+        {
+            return _phoneService.AddPhone(model);
+        }
+
+        /// <summary>
+        /// Update phone by id
+        /// </summary>
+        [HttpPut("{id}")]
+        public bool Update(int id, [FromBody] PhoneData model)
+        {
+            return _phoneService.UpdatePhone(id, model);
+        }
+
+        /// <summary>
+        /// Delete phone by id
+        /// </summary>
+        [HttpDelete("{id}")]
+        public bool Delete(int id)
+        {
+            return _phoneService.DeletePhone(id);
         }
     }
 }
