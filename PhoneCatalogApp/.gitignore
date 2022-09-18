@@ -1,3 +1,6 @@
+.vscode/.react
+/coverage
+
 # OSX
 #
 .DS_Store

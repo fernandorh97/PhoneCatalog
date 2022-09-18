@@ -29,7 +29,7 @@ export function Home({navigation}) {
           dispatch(setPhoneList(x));
         })
         .catch(x => {
-          console.log('GetPhones error', x);
+          console.log('GetPhones error', JSON.stringify(x));
           setFailed(true);
         });
     }
@@ -64,8 +64,9 @@ export function Home({navigation}) {
       ) : (
         <FlatList
           data={phoneList}
-          renderItem={({item}) => (
+          renderItem={({item, index}) => (
             <PhoneItem
+              testID={'phone-' + index}
               name={item.name}
               imageFileName={item.imageFileName}
               onPress={() =>

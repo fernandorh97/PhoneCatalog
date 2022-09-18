@@ -160,6 +160,9 @@ android {
                 }
             }
         }
+        
+        testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     if (isNewArchitectureEnabled()) {
@@ -278,6 +281,10 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+
+    androidTestImplementation('com.wix:detox:+')
 }
 
 if (isNewArchitectureEnabled()) {
