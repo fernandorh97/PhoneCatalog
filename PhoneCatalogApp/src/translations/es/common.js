@@ -3,6 +3,7 @@ export default {
   no: 'No',
   back: 'Atrás',
   loading: 'Cargando',
+  retry: 'Reintentar',
 
   addPhone: 'Añadir nuevo móvil',
   editPhone: 'Editar móvil',
@@ -11,6 +12,7 @@ export default {
 
   phoneAdded: 'Móvil añadido',
   phoneUpdated: 'Móvil actualizado',
+  requestFailed: 'La petición al servidor ha fallado. Intente de nuevo',
 
   phoneCatalog: 'Catálogo',
   phoneDetails: 'Detalles',

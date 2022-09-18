@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 import LottieView from 'lottie-react-native';
 
 import {styles} from './styles';
-import {AddButton, PhoneItem} from '@/components';
+import {AddButton, Button, PhoneItem} from '@/components';
 import {GetPhones} from '@/api/PhoneCatalogApi';
 import {typography} from '@/theme';
 import {useDispatch, useSelector} from 'react-redux';
@@ -17,23 +17,50 @@ export function Home({navigation}) {
   const theme = useTheme();
 
   const phoneList = useSelector(state => state.phones?.list);
+  const [failed, setFailed] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    GetPhones()
-      .then(x => {
-        console.log(`Received phone list with ${x.length} elements`);
-        dispatch(setPhoneList(x));
-      })
-      .catch(x => console.log('GetPhones error', x));
+    if (!failed) {
+      GetPhones()
+        .then(x => {
+          console.log(`Received phone list with ${x.length} elements`);
+          dispatch(setPhoneList(x));
+        })
+        .catch(x => {
+          console.log('GetPhones error', x);
+          setFailed(true);
+        });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [failed]);
 
   return (
     <View testID="home-screen" style={styles.screen}>
-      {!phoneList ? (
-        <LottieView style={styles.spinner} source={spinnerAnim} autoPlay loop />
+      {failed ? (
+        <View style={styles.centerScreen}>
+          <Text style={[styles.error, {color: theme.colors.placeholderText}]}>
+            {t('requestFailed')}
+          </Text>
+          <Button
+            onPress={() => {
+              setFailed(false);
+            }}
+            testID={'retry-button'}
+            style={styles.button}
+            text={t('retry')}
+          />
+        </View>
+      ) : !phoneList ? (
+        <View style={styles.centerScreen}>
+          <LottieView
+            style={styles.spinner}
+            source={spinnerAnim}
+            autoPlay
+            loop
+          />
+        </View>
       ) : (
         <FlatList
           data={phoneList}
@@ -49,6 +76,8 @@ export function Home({navigation}) {
           keyExtractor={item => item.id}
           numColumns={2}
           columnWrapperStyle={styles.row}
+          overScrollMode={'never'}
+          style={styles.list}
         />
       )}
       <AddButton

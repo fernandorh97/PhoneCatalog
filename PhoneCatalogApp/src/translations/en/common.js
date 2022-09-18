@@ -3,6 +3,7 @@ export default {
   no: 'No',
   back: 'Back',
   loading: 'Loading',
+  retry: 'Retry',
 
   addPhone: 'Add new phone',
   editPhone: 'Edit phone',
@@ -11,6 +12,7 @@ export default {
 
   phoneAdded: 'Phone added',
   phoneUpdated: 'Phone updated',
+  requestFailed: 'Server request has failed. Please try again',
 
   phoneCatalog: 'Phone Catalog',
   phoneDetails: 'Phone Details',

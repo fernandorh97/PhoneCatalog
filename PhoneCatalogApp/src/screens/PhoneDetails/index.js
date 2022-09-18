@@ -98,7 +98,7 @@ export function PhoneDetails({route, navigation}) {
 
   return (
     <View testID="phone-details-screen">
-      <ScrollView ref={scrollRef}>
+      <ScrollView ref={scrollRef} overScrollMode={'never'}>
         <View
           style={[
             styles.container,
