@@ -3,6 +3,7 @@ import Config from 'react-native-config';
 
 const instance = axios.create({
   baseURL: Config.PHONE_CATALOG_API_URL,
+  timeout: 9000,
 });
 
 export function GetPhones() {
