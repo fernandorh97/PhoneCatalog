@@ -13,6 +13,7 @@ export default {
   phoneAdded: 'Phone added',
   phoneUpdated: 'Phone updated',
   requestFailed: 'Server request has failed. Please try again',
+  noPhones: 'Phone list is empty',
 
   phoneCatalog: 'Phone Catalog',
   phoneDetails: 'Phone Details',

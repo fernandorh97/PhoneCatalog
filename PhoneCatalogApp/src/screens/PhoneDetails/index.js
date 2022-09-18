@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useTheme} from '@react-navigation/native';
-import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, Text, View} from 'react-native';
 
 import {styles} from './styles';
 import {useDispatch, useSelector} from 'react-redux';

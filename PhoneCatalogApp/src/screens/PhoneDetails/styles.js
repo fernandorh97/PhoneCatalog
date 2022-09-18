@@ -5,8 +5,6 @@ import {spacing, typography} from '@/theme';
 
 const window = Dimensions.get('window');
 
-const screen = Dimensions.get('screen');
-
 export const styles = StyleSheet.create({
   image: {
     width: window.width * 0.65,

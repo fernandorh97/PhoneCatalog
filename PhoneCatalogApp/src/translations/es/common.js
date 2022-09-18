@@ -13,6 +13,7 @@ export default {
   phoneAdded: 'Móvil añadido',
   phoneUpdated: 'Móvil actualizado',
   requestFailed: 'La petición al servidor ha fallado. Intente de nuevo',
+  noPhones: 'La lista de móviles está vacía',
 
   phoneCatalog: 'Catálogo',
   phoneDetails: 'Detalles',

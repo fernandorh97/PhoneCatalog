@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useTheme} from '@react-navigation/native';
-import {FlatList, ScrollView, Text, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import LottieView from 'lottie-react-native';
 
 import {styles} from './styles';
 import {AddButton, Button, PhoneItem} from '@/components';
 import {GetPhones} from '@/api/PhoneCatalogApi';
-import {typography} from '@/theme';
 import {useDispatch, useSelector} from 'react-redux';
 import {setPhoneList} from '@/actions/PhonesActions';
 import {spinnerAnim} from '@/assets';
@@ -78,6 +77,11 @@ export function Home({navigation}) {
           numColumns={2}
           columnWrapperStyle={styles.row}
           overScrollMode={'never'}
+          ListEmptyComponent={
+            <Text style={[styles.error, {color: theme.colors.placeholderText}]}>
+              {t('noPhones')}
+            </Text>
+          }
           style={styles.list}
         />
       )}

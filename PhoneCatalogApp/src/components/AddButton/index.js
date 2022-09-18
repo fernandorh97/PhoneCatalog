@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useTheme} from '@react-navigation/native';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 
 import {styles} from './styles';
 
