@@ -15,8 +15,8 @@ export default {
   requestFailed: 'Server request has failed. Please try again',
   noPhones: 'Phone list is empty',
 
-  phoneCatalog: 'Phone Catalog',
-  phoneDetails: 'Phone Details',
+  phoneCatalog: 'Catalog',
+  phoneDetails: 'Details',
 
   name: 'Name',
   manufacturer: 'Manufacturer',

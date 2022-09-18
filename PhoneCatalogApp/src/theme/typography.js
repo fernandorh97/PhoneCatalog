@@ -15,7 +15,7 @@ export const typography = StyleSheet.create({
     letterSpacing: -0.2,
   },
   h3: {
-    fontFamily: 'Roboto-SemiBold',
+    fontFamily: 'Roboto-Medium',
     fontSize: window.width * ratio * 24,
     letterSpacing: -0.2,
   },
