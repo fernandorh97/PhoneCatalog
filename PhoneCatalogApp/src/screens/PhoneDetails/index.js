@@ -98,7 +98,10 @@ export function PhoneDetails({route, navigation}) {
 
   return (
     <View testID="phone-details-screen">
-      <ScrollView ref={scrollRef} overScrollMode={'never'}>
+      <ScrollView
+        testID="phone-details-scroll"
+        ref={scrollRef}
+        overScrollMode={'never'}>
         <View
           style={[
             styles.container,
@@ -169,7 +172,9 @@ export function PhoneDetails({route, navigation}) {
           </View>
         </View>
         {status && (
-          <Text style={[styles.status, {color: theme.colors.placeholderText}]}>
+          <Text
+            testID="status-text"
+            style={[styles.status, {color: theme.colors.placeholderText}]}>
             {status}
           </Text>
         )}
@@ -190,7 +195,7 @@ export function PhoneDetails({route, navigation}) {
                   setEditable(true);
                 });
             }}
-            testID={'add-button'}
+            testID={'confirm-add-button'}
             style={styles.button}
             text={t('addPhone')}
           />

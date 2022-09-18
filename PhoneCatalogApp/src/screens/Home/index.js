@@ -62,6 +62,7 @@ export function Home({navigation}) {
         </View>
       ) : (
         <FlatList
+          testID="phone-list"
           data={phoneList}
           renderItem={({item, index}) => (
             <PhoneItem
@@ -86,6 +87,7 @@ export function Home({navigation}) {
         />
       )}
       <AddButton
+        testID={'add-button'}
         style={styles.addButton}
         onPress={() => navigation.navigate('PhoneDetails')}
       />

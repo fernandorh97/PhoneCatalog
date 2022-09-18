@@ -8,6 +8,7 @@ export function Editable({editable, style, children, onPress, testID}) {
   const theme = useTheme();
   return (
     <TouchableOpacity
+      testID={testID}
       disabled={!editable}
       style={[
         styles.editable,
