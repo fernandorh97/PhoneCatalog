@@ -49,19 +49,24 @@ Mobile app implemented in React Native.
 
 Make sure React Native is [set up and ready](https://reactnative.dev/docs/environment-setup).
 
-Install all the packages.
+Install packages
 ```bash
 npm i
 ```
 
-Run the app.
+Run the app (Android)
 ```bash
 npx react-native run-android
 ```
 
+Run the app (iOS)
+```bash
+npx react-native run-iOS
+```
+
 If you want to change API URL for the app, edit the `.env` file. By default it will point to a Heroku API URL.
 
-### App tests
+### Testing
 
 Run jest tests.
 ```bash
